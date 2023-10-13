@@ -1,0 +1,520 @@
+openapi: 3.0.3
+info:
+  title: Swagger Gangane Construnction - OpenAPI 3.0
+  description: |-
+    This is a Gangane construction management app based on the OpenAPI 3.0 specification.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080
+paths:
+  /labour/add:
+    post:
+      tags:
+        - labour
+      summary: Add new labour
+      description: Add new labour with details
+      operationId: addLabour
+      requestBody:
+        description: Regsiter a new labour in company
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabourRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Intrnal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'        
+        '404':
+          description: not found
+        '405':
+          description: Validation exception
+  /labour/update/{labourId}:
+    put:
+      tags:
+        - labour
+      summary: update old labour
+      description: Update old labour with new details
+      operationId: updateLabour
+      parameters:
+        - name: labourId
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: New details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabourRequest'
+        required: true      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Intrnal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'        
+        '404':
+          description: not found
+        '405':
+          description: Validation exception  
+  /labour/delete/{labourId}:
+    delete:
+      tags:
+        - labour
+      summary: delete labour
+      description: delete old labour by labour
+      operationId: deleteLabour
+      parameters:
+        - name: labourId
+          in: path
+          description: ID of order that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Intrnal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'        
+        '404':
+          description: not found
+        '405':
+          description: Validation exception  
+  /labour/find:
+    get:
+      tags:
+        - labour
+      summary: Fetch labour by its id
+      description: labour id to be fetched
+      operationId: fetchLabour
+      parameters:
+        - name: labourId
+          in: query
+          description: id of labour that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Intrnal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'        
+        '404':
+          description: not found
+        '405':
+          description: Validation exception          
+  /labour/findAll:
+    get:
+      tags:
+        - labour
+      summary: List out all labours
+      description: list out all labours
+      operationId: fetchAllLabour
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Intrnal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'        
+        '404':
+          description: not found
+        '405':
+          description: Validation exception
+  /labour/markAttendance:
+    post:
+      tags:
+        - labour
+      summary: Mark Attendance labour in bulk
+      description: Mark Attendance labour in bulk
+      operationId: markAttendanceBulk
+      requestBody:
+        description: Mark Attendance labour in bulk
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttendanceRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Intrnal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'        
+        '404':
+          description: not found
+        '405':
+          description: Validation exception
+  /demo:
+    post:
+      tags:
+        - labourq
+      summary: Mark Attendance labour in bulk
+      description: Mark Attendance labour in bulk
+      operationId: demoidq
+      requestBody:
+        description: Mark Attendance labour in bulk
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Demo'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /getDemo:
+    get:
+      tags:
+        - getDemo
+      summary: get request with header validation only
+      description: get request with header validation only
+      operationId: getDemoId
+      parameters:
+        - in: header
+          name: myHeader
+          schema:
+            type: integer
+            format: int32
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'            
+components:
+  schemas:
+    LabourRequest:
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+      properties:
+        id:
+          type: string
+          example: 10
+        type:
+          type: string
+          example: construction labour
+        attributes:
+          $ref: '#/components/schemas/Labour'
+    Labour:
+      required:
+        - firstName
+        - lastName
+        - dob
+        - gender
+        - address
+        - contactDetails
+        - labourSkills
+        - salary
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        firstName:
+          type: string
+          example: Viraj
+        middleName:
+          type: string
+          example: Vyankat
+        lastName:
+          type: string
+          example: Bansode          
+        dob:
+          type: string
+          format: date-time
+          example: viraj
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+          example: Male    
+        address:
+          $ref: '#/components/schemas/Address'
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        identityDetails:
+          $ref: '#/components/schemas/IdentityDetails' 
+        skills:
+          type: string
+          example: capenter  
+        salary:
+          $ref: '#/components/schemas/Salary'      
+    Address:
+      required:
+        - addressLine1
+        - state
+        - country
+        - pinCode
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        addressLine1:
+          type: string
+          example: addressLine1
+        addressLine2:
+          type: string
+          example: addressLine2
+        addressLine3:
+          type: string
+          example: addressLine3          
+        state:
+          type: string
+          example: maharashtra
+        country:
+          type: string
+          example: inida
+        pinCode:
+          type: string
+          example: 411046
+    ContactDetails:
+      required:
+        - phone1
+      type: object
+      properties:
+        phone1:
+          type: integer
+          example: 9410121314
+        phone2:
+          type: integer
+          example: 9410121314  
+        emailId:
+          type: string
+          example: viraj@mycompany.com
+    IdentityDetails:
+      required:
+        - aadharCardNumber
+      type: object
+      properties:
+        panCardNumber:
+          type: string
+          example: panCardNumber
+        aadharCardNumber:
+          type: string
+          example: aadharCardNumber  
+        votingCardNumber:
+          type: string
+          example: votingCardNumber
+    Salary:
+      required:
+        - salaryAmount
+        - bankDetails
+      type: object
+      properties:
+        salaryAmount:
+          type: integer
+          example: salaryAmount
+        bankDetails:
+          type: string
+          $ref: '#/components/schemas/BankDetails'
+    BankDetails:
+      required:
+        - accountNumber
+        - upiId
+        - mobileNumber
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1011
+        accountNumber:
+          type: string
+          example: 1222234231231
+        bankName:
+          type: string
+          example: 1222234231231
+        branchName:
+          type: string
+          example: 1222234231231
+        upiId:
+          type: string
+          example: 1222234231231  
+        mobileNumber:
+          type: integer
+    AttendanceRequest:
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+      properties:
+        id:
+          type: string
+          example: 10
+        type:
+          type: string
+          example: attendace labour
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendance'      
+    Attendance:
+      required:
+        - day
+        - labourId
+        - duration
+      type: object
+      properties:
+        day:
+          type: string
+          format : date-time
+          example: 31-12-2022
+        labourId:
+          type: integer
+          example: 101
+          format: int32
+        duration:
+          enum:
+            - half
+            - full
+          type: string
+          example: full
+    ApiResponse:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    Demo:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    ApiErrorResponse:
+      type: object
+      required:
+        - id
+        - message
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        message:
+          type: string  
+        errorDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      properties:
+        description:
+          type: string
+        message:
+          type: string
